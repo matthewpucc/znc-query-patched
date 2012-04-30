@@ -39,11 +39,11 @@ case "$1" in
     else
       [ -f $LOCK ] && rm -f $LOCK
     fi
-    rm -f $TMP
+
     if [ "$USER" == "$ZNC" ]; then
-      daemon $DAEMON $DAEMON_ARGS &>/dev/null &
+      daemon $DAEMON $DAEMON_ARGS & #>/dev/null &
     else
-      daemon --user=$USER $DAEMON $DAEMON_ARGS &>/dev/null &
+      daemon --user=$USER $DAEMON $DAEMON_ARGS & #>/dev/null &
     fi
     touch $LOCK
   ;;
@@ -68,6 +68,12 @@ case "$1" in
   ;;
   *)
     echo "Usage: $NAME {start|stop|status|reload|restart}"
+    rm -f $TMP
     exit 1
   ;;
 esac
+
+
+rm -f $TMP
+
+exit 0
