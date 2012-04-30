@@ -39,9 +39,9 @@ case "$1" in
     fi
     rm -f $TMP
     if [ "$USER" == "$ZNC" ]; then
-      daemon $DAEMON &>/dev/null &
+      daemon $DAEMON $DAEMON_ARGS &>/dev/null &
     else
-      daemon --user=$ZNC $DAEMON &>/dev/null &
+      daemon --user=$ZNC $DAEMON $DAEMON_ARGS &>/dev/null &
     fi
     touch $LOCK
   ;;
