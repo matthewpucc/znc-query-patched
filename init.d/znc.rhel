@@ -29,19 +29,14 @@ GROUP=znc
 case "$1" in
   start)
     echo -n "Starting $NAME services: "
-    if [ `pgrep $NAME | wc -l` -gt 0 ]
-    then
+    if [ `pgrep $NAME | wc -l` -gt 0 ]; then
       echo "$NAME is already running"
       exit 1
     else
-      if [ -f $LOCK ]
-      then
-        rm -f $LOCK
-      fi
+      [ -f $LOCK ] && rm -f $LOCK
     fi
 
-    if [[ "$USER" == "$ZNC" ]]
-    then
+    if [ "$USER" == "$ZNC" ]; then
       daemon $DAEMON &>/dev/null &
     else
       daemon --user=$ZNC $DAEMON &>/dev/null &
