@@ -20,7 +20,7 @@ LOCK=/var/lock/subsys/$NAME
 SCRIPTNAME=/etc/init.d/$NAME
 USER=znc
 GROUP=znc
-DATADIR=/home/$USER/.znc
+DATADIR=/home/${USER}/.znc
 DAEMON_ARGS="--datadir=$DATADIR"
 PID="$$"
 TMP=`mktemp`
@@ -41,9 +41,9 @@ case "$1" in
     fi
 
     if [ "$USER" == "$ZNC" ]; then
-      daemon $DAEMON $DAEMON_ARGS & #>/dev/null &
+      daemon $DAEMON $DAEMON_ARGS &>/dev/null &
     else
-      daemon --user=$USER $DAEMON $DAEMON_ARGS & #>/dev/null &
+      daemon --user=$USER $DAEMON $DAEMON_ARGS &>/dev/null &
     fi
     touch $LOCK
   ;;
