@@ -33,7 +33,7 @@ case "$1" in
   start)
     echo -n "Starting $NAME services: "
     
-    if [ '`wc -l $TMP | sed "s% ${TMP}%%"`' -gt 0 ]; then
+    if [ `wc -l $TMP | sed "s% ${TMP}%%"` -gt 0 ]; then
       echo "$NAME is already running"
       exit 1
     else
@@ -53,7 +53,7 @@ case "$1" in
     rm -f $LOCK
   ;;
   status)
-    if [ '`wc -l $TMP | sed "s% ${TMP}%%"`' -gt 0 ]; then
+    if [ `wc -l $TMP | sed "s% ${TMP}%%"` -gt 0 ]; then
       echo "$NAME is running"
     else
       echo "$NAME is not running"
