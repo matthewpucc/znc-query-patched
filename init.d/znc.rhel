@@ -23,25 +23,27 @@ SCRIPTNAME=/etc/init.d/$NAME
 USER=znc
 GROUP=znc
 PID="$$"
+TMP=`mktemp`
 
 [ -x "$DAEMON" ] || exit 0
+
+pgrep $NAME | grep -v "$PID" > $TMP
 
 case "$1" in
   start)
     echo -n "Starting $NAME services: "
-    TMP=`mktemp`
-    pgrep $NAME | grep -v "$PID" > $TMP
-    if [ `wc -l $TMP` -gt 0 ]; then
+    
+    if [[ `wc -l $TMP` -gt 0 ]]; then
       echo "$NAME is already running"
       exit 1
     else
       [ -f $LOCK ] && rm -f $LOCK
     fi
     rm -f $TMP
-    if [ "$USER" == "$ZNC" ]; then
+    if [[ "$USER" == "$ZNC" ]]; then
       daemon $DAEMON $DAEMON_ARGS &>/dev/null &
     else
-      daemon --user=$ZNC $DAEMON $DAEMON_ARGS &>/dev/null &
+      daemon --user=$USER $DAEMON $DAEMON_ARGS &>/dev/null &
     fi
     touch $LOCK
   ;;
@@ -51,7 +53,7 @@ case "$1" in
     rm -f $LOCK
   ;;
   status)
-    if [ `pgrep $NAME | wc -l` -gt 0 ]; then
+    if [[ `wc -l $TMP` -gt 0 ]]; then
       echo "$NAME is running"
     else
       echo "$NAME is not running"
