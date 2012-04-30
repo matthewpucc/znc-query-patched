@@ -28,7 +28,7 @@ GROUP=znc
 case "$1" in
   start)
     echo -n "Starting $NAME services: "
-    if [ `pgrep $NAME | wc -l` -gt 0 ]; then
+    if [ `pgrep $NAME | grep -v $$ | wc -l` -gt 0 ]; then
       echo "$NAME is already running"
       exit 1
     else
