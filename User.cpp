@@ -537,6 +537,7 @@ void CUser::UserConnected(CClient* pClient) {
 		MODULECALL(OnPrivBufferPlayLine(*pClient, sBufLine), this, NULL, continue);
 		pClient->PutClient(sBufLine);
 	}
+  m_QueryBuffer.Clear();
 
 	// Tell them why they won't connect
 	if (!GetIRCConnectEnabled())
