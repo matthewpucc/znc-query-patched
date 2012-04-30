@@ -16,12 +16,12 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin
 DESC="ZNC daemon"
 NAME=znc
 DAEMON=/usr/local/bin/$NAME
-DATADIR=/home/$USER/.znc
-DAEMON_ARGS="--datadir=$DATADIR"
 LOCK=/var/lock/subsys/$NAME
 SCRIPTNAME=/etc/init.d/$NAME
 USER=znc
 GROUP=znc
+DATADIR=/home/$USER/.znc
+DAEMON_ARGS="--datadir=$DATADIR"
 PID="$$"
 TMP=`mktemp`
 
