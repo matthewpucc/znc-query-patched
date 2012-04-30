@@ -1,16 +1,13 @@
 #!/bin/bash
-#
-# /etc/rc.d/init.d/znc
-#
-# <description of the *service*>
-# <any general comments about this init script>
-#
-# <tags -- see below for tag definitions. *Every line* from the top
-# of the file to the end of the tags section must begin with a #
-# character. After the tags section, there should be a blank line.
-# This keeps normal comments in the rest of the file from being
-# mistaken for tags, should they happen to fit the pattern.>
-
+### BEGIN INIT INFO
+# Provides:          znc
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: ZNC IRC bouncer
+# Description:       ZNC is an IRC bouncer
+### END INIT INFO
 
 # Source function library.
 . /etc/rc.d/init.d/functions
@@ -19,12 +16,14 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin
 DESC="ZNC daemon"
 NAME=znc
 DAEMON=/usr/local/bin/$NAME
-DATADIR=/var/lib/znc
+DATADIR=/home/$USER/.znc
 DAEMON_ARGS="--datadir=$DATADIR"
 LOCK=/var/lock/subsys/$NAME
 SCRIPTNAME=/etc/init.d/$NAME
 USER=znc
 GROUP=znc
+
+[ -x "$DAEMON" ] || exit 0
 
 case "$1" in
   start)
