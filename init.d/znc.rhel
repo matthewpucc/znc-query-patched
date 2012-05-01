@@ -46,6 +46,7 @@ case "$1" in
       daemon --user=$USER $DAEMON $DAEMON_ARGS &>/dev/null &
     fi
     touch $LOCK
+    echo "Done"
   ;;
   stop)
     echo -n "Shutting down $NAME services: "
